@@ -1,4 +1,17 @@
 class RiskManager:
+    def set_oco_orders(self, trade_id):
+    # Set 80% take profit and 50% stop loss
+    tp_url = f"https://api.pocketoption.com/orders/take_profit"
+    sl_url = f"https://api.pocketoption.com/orders/stop_loss"
+    
+    payload = {
+        "trade_id": trade_id,
+        "percent": 80  # 80% of potential profit
+    }
+    requests.post(tp_url, json=payload)
+    
+    payload["percent"] = 50  # 50% stop loss
+    requests.post(sl_url, json=payload)
     def __init__(self, balance=1000):
         self.balance = balance
         self.daily_loss = 0
