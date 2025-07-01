@@ -6,6 +6,20 @@ from .performance import PerformanceTracker
 from .telegram_bot import TelegramBot
 
 class TradingBot:
+def _self_healing(self):
+    if self.performance.get_win_rate() < 0.65:
+        self.telegram.send_alert("⚠️ Win rate below 65% - retraining models")
+        self.retrain_models()
+        
+    if self.performance.current_balance < self.initial_balance * 0.9:
+        self.telegram.send_alert("🆘 Account drawdown >10% - stopping trading")
+        self.trading_active = False
+
+def retrain_models(self):
+    """Retrain models with latest data"""
+    subprocess.run(["python", "scripts/train_models.py"])
+    self.ai.load_models()  # Reload new models
+    self.telegram.send_alert("✅ Models retrained successfully")
     def __init__(self):
         self.ai = AIPredictor()
         self.risk = RiskManager()
