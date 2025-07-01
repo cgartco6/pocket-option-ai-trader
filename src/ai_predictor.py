@@ -5,6 +5,25 @@ from ta import add_all_ta_features
 from .data_engine import DataEngine
 
 class AIPredictor:
+    def detect_breakout(self, df):
+    # Triple confirmation system
+    last = df.iloc[-1]
+    prev = df.iloc[-2]
+    
+    # 1. Price action
+    price_break = (last['close'] > last['bollinger_hband']) or \
+                  (last['close'] < last['bollinger_lband'])
+    
+    # 2. Volume spike (2x average)
+    vol_spike = last['volume'] > 2.0 * df['volume'].rolling(20).mean().iloc[-1]
+    
+    # 3. RSI divergence
+    rsi_bullish = (last['rsi'] > 50) and (last['rsi'] > prev['rsi'])
+    rsi_bearish = (last['rsi'] < 50) and (last['rsi'] < prev['rsi'])
+    
+    return (price_break and vol_spike and 
+           ((last['close'] > last['open'] and rsi_bullish) or 
+            (last['close'] < last['open'] and rsi_bearish)))
     def __init__(self):
         self.models = self.load_models()
         self.data_engine = DataEngine()
