@@ -1,8 +1,12 @@
 trading:
-  pairs: [USD/ZAR, USD/TRY, EUR/TRY, GBP/ZAR]
-  timeframe: 1m
+  pairs: 
+    - USD/ZAR
+    - USD/TRY
+    - EUR/TRY
+    - GBP/ZAR
+  timeframe: "1m"
   amount: 50
-  max_daily_loss: 5%
+  max_daily_loss: 5%   # Percentage of account
 
 signals:
   min_confidence: 0.85
