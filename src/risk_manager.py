@@ -1,7 +1,18 @@
 class RiskManager:
     # Initial risk parameters
-RISK_PER_TRADE = 1.0  # 1% of account
-MAX_DAILY_RISK = 5.0  # 5% max daily loss
+    RISK_PER_TRADE = 1.0  # 1% of account
+    MAX_DAILY_RISK = 5.0  # 5% max daily loss
+   
+    def adjust_risk():
+    """Increase risk after profit milestones"""
+    if balance > 200 and balance <= 500:
+        return 1.5
+    elif balance > 500 and balance <= 1000:
+        return 2.0
+    elif balance > 1000:
+        return 2.5
+    return 1.0
+    
     def set_oco_orders(self, trade_id):
     # Set 80% take profit and 50% stop loss
     tp_url = f"https://api.pocketoption.com/orders/take_profit"
@@ -15,6 +26,7 @@ MAX_DAILY_RISK = 5.0  # 5% max daily loss
     
     payload["percent"] = 50  # 50% stop loss
     requests.post(sl_url, json=payload)
+   
     def __init__(self, balance=1000):
         self.balance = balance
         self.daily_loss = 0
