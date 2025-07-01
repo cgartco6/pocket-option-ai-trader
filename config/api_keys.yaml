@@ -1,0 +1,15 @@
+pocket_option:
+  token: "YOUR_POCKET_OPTION_API_TOKEN"
+
+telegram:
+  token: "YOUR_TELEGRAM_BOT_TOKEN"
+  channel_id: "@your_channel"
+
+newsapi:
+  key: "YOUR_NEWSAPI_KEY"
+
+alpha_vantage:
+  key: "YOUR_ALPHA_VANTAGE_KEY"
+
+huggingface:
+  token: "YOUR_HUGGINGFACE_TOKEN"
