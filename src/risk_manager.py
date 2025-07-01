@@ -1,4 +1,7 @@
 class RiskManager:
+    # Initial risk parameters
+RISK_PER_TRADE = 1.0  # 1% of account
+MAX_DAILY_RISK = 5.0  # 5% max daily loss
     def set_oco_orders(self, trade_id):
     # Set 80% take profit and 50% stop loss
     tp_url = f"https://api.pocketoption.com/orders/take_profit"
