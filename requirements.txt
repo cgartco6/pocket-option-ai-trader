@@ -8,3 +8,4 @@ ta==0.10.2
 pyyaml==6.0
 yfinance==0.2.18
 beautifulsoup4==4.12.2
+urllib3>=2.6.3 # not directly required, pinned by Snyk to avoid a vulnerability
